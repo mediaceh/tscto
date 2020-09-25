@@ -62,7 +62,7 @@ $apiJSONFormated = new apiJSONFormated;
 
 try {
     $data = $apiJSONFormated->getData();
-} catch(Exception $e) {
+} catch(Exception | TypeError $e) {
     echo $e->getMessage();
 }
 
@@ -72,7 +72,7 @@ $apiCSVFormated = new apiCSVFormated;
 
 try {
     $data = $apiCSVFormated->getData();
-} catch(Exception $e) {
+} catch(Exception | TypeError $e) {
     echo $e->getMessage();
 }
 
