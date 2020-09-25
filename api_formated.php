@@ -5,16 +5,16 @@ class apiJSONFormated {
     private const URL = 'https://api.coronavirus.data.gov.uk/v1/data?filters=areaType=nation;areaName=england&structure={"date":"date","newCases":"newCasesByPublishDate"}&format=xml';
 
     private function getRemoteXMLData(): SimpleXMLElement {
-        $options = array(
-            'http' => array(
+        $options = [
+            'http' => [
                 'timeout' => 10,
                 'ignore_errors' => false,
                 'header'  => "Content-type: application/json\r\n".
                              "Accepts: application/json; application/xml; text/csv; application/vnd.PHE-COVID19.v1+json; application/vnd.PHE-COVID19.v1+xml"."\r\n".
                              "Accept-Encoding: gzip"."\r\n",
                 'method'  => 'GET',
-            ),
-        );
+            ],
+        ];
         $context = stream_context_create($options);
         set_error_handler(function ($errno, $errstr, $errfile, $errline, array $errcontext) {
                 throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
