@@ -1,4 +1,8 @@
 <?php
+/**
+* Why i'm not static?
+* Dick knows him!
+*/
 
 class apiJSONFormated {
 
