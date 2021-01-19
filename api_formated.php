@@ -1,6 +1,6 @@
 <?php
 
-class apiJSONFormated {
+class ApiJSONFormated {
 
     private const URL = 'https://api.coronavirus.data.gov.uk/v1/data?filters=areaType=nation;areaName=england&structure={"date":"date","newCases":"newCasesByPublishDate"}&format=xml';
 
@@ -41,7 +41,7 @@ class apiJSONFormated {
 }
 
 
-class apiCSVFormated extends apiJSONFormated {
+class ApiCSVFormated extends ApiJSONFormated {
 
     public static function getData(): string {
         $json = parent::getData();
@@ -59,7 +59,7 @@ class apiCSVFormated extends apiJSONFormated {
 }
 
 try {
-    $data = apiJSONFormated::getData();
+    $data = ApiJSONFormated::getData();
 } catch(Exception | TypeError $e) {
     echo $e->getMessage();
 }
@@ -67,7 +67,7 @@ try {
 var_dump($data);
 
 try {
-    $data = apiCSVFormated::getData();
+    $data = ApiCSVFormated::getData();
 } catch(Exception | TypeError $e) {
     echo $e->getMessage();
 }
