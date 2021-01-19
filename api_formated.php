@@ -21,7 +21,7 @@ class apiJSONFormated {
             }
         );
         try {
-			$result = file_get_contents(self::URL, false, $context);
+            $result = file_get_contents(self::URL, false, $context);
         } finally {
             restore_error_handler();
         }
