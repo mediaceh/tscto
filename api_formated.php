@@ -1,14 +1,10 @@
 <?php
-/**
-* Why i'm not static?
-* Dick knows him!
-*/
 
 class apiJSONFormated {
 
     private const URL = 'https://api.coronavirus.data.gov.uk/v1/data?filters=areaType=nation;areaName=england&structure={"date":"date","newCases":"newCasesByPublishDate"}&format=xml';
 
-    private function getRemoteXMLData(): SimpleXMLElement {
+    private static function getRemoteXMLData(): SimpleXMLElement {
         $options = [
             'http' => [
                 'timeout' => 10,
@@ -25,7 +21,7 @@ class apiJSONFormated {
             }
         );
         try {
-            $result = file_get_contents(self::URL, false, $context);
+			$result = file_get_contents(self::URL, false, $context);
         } finally {
             restore_error_handler();
         }
@@ -33,8 +29,8 @@ class apiJSONFormated {
         return $xml;
     }
     
-    public function getData(): string {
-        $xml = $this->getRemoteXMLData();
+    public static function getData(): string {
+        $xml = self::getRemoteXMLData();
         $output = [];
         foreach($xml->data as $row) {
             $output[] = $row;
@@ -47,7 +43,7 @@ class apiJSONFormated {
 
 class apiCSVFormated extends apiJSONFormated {
 
-    public function getData(): string {
+    public static function getData(): string {
         $json = parent::getData();
         $json = json_decode($json);
         $csv = fopen('php://temp', 'r+');
@@ -62,20 +58,16 @@ class apiCSVFormated extends apiJSONFormated {
 
 }
 
-$apiJSONFormated = new apiJSONFormated;
-
 try {
-    $data = $apiJSONFormated->getData();
+    $data = apiJSONFormated::getData();
 } catch(Exception | TypeError $e) {
     echo $e->getMessage();
 }
 
 var_dump($data);
 
-$apiCSVFormated = new apiCSVFormated;
-
 try {
-    $data = $apiCSVFormated->getData();
+    $data = apiCSVFormated::getData();
 } catch(Exception | TypeError $e) {
     echo $e->getMessage();
 }
