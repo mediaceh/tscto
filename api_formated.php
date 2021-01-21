@@ -60,7 +60,7 @@ class ApiCSVFormated extends ApiJSONFormated {
 
 try {
     $data = ApiJSONFormated::getData();
-} catch(Exception | TypeError $e) {
+} catch(ErrorException | TypeError $e) {
     echo $e->getMessage();
 }
 
@@ -68,7 +68,7 @@ var_dump($data);
 
 try {
     $data = ApiCSVFormated::getData();
-} catch(Exception | TypeError $e) {
+} catch(ErrorException | TypeError $e) {
     echo $e->getMessage();
 }
 
