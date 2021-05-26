@@ -1,10 +1,6 @@
 <?php
 
-interface ApiFormated {
-    public static function getData(): string;
-}
-
-class ApiJSONFormated implements ApiFormated {
+class ApiJSONFormated {
 
     private const URL = 'https://api.coronavirus.data.gov.uk/v1/data?filters=areaType=nation;areaName=england&structure={"date":"date","newCases":"newCasesByPublishDate"}&format=xml';
 
